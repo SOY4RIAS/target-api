@@ -63,6 +63,8 @@ module.exports = {
             "test/**/*",
          ]
       }
-    ]
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
   },
 };

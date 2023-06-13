@@ -1,6 +1,7 @@
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as fs from 'fs';
+import * as YAML from 'yaml';
 
 export const configApp = (app: INestApplication) => {
   app.setGlobalPrefix('api/v1');
@@ -26,7 +27,7 @@ export const configSwagger = (app: INestApplication, env: string) => {
   const document = SwaggerModule.createDocument(app, options);
 
   if (env === 'development') {
-    fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+    fs.writeFileSync('./oas3.yaml', YAML.stringify(document));
   }
 
   SwaggerModule.setup('api/v1/docs', app, document);

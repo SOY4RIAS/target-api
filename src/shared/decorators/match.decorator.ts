@@ -9,7 +9,7 @@ import {
 
 @ValidatorConstraint({ name: 'Match' })
 export class MatchConstraint implements ValidatorConstraintInterface {
-  validate(value: any, validationArguments?: ValidationArguments): boolean {
+  validate(value: unknown, validationArguments?: ValidationArguments): boolean {
     const [propertyNameToCompare] = validationArguments.constraints;
 
     return equals(validationArguments.object[propertyNameToCompare], value);

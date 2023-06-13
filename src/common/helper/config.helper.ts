@@ -1,5 +1,6 @@
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
+import * as fs from 'fs';
 
 export const configApp = (app: INestApplication) => {
   app.setGlobalPrefix('api/v1');
@@ -13,7 +14,7 @@ export const configApp = (app: INestApplication) => {
   );
 };
 
-export const configSwagger = (app: INestApplication) => {
+export const configSwagger = (app: INestApplication, env: string) => {
   const options = new DocumentBuilder()
     .setTitle('Target-API')
     .setDescription('Target-API v2 training project')
@@ -23,6 +24,10 @@ export const configSwagger = (app: INestApplication) => {
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
+
+  if (env === 'development') {
+    fs.writeFileSync('./swagger-spec.json', JSON.stringify(document));
+  }
 
   SwaggerModule.setup('api/v1/docs', app, document);
 };

@@ -9,9 +9,10 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
   const port = configService.get<number>('PORT');
+  const env = configService.get<string>('NODE_ENV');
 
   configApp(app);
-  configSwagger(app);
+  configSwagger(app, env);
 
   await app.listen(port, () => {
     Logger.log(`PORT: ${port}`, 'Bootstrap');

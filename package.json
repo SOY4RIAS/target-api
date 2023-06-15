@@ -83,6 +83,11 @@
     "coverageDirectory": "../coverage",
     "testEnvironment": "node",
     "moduleNameMapper": {
+      "^@shared/(.*)$": "<rootDir>/../src/shared/$1",
+      "^@decorators/(.*)$": "<rootDir>/../src/shared/decorators/$1",
+      "^@types/(.*)$": "<rootDir>/../src/shared/types/$1",
+      "^@common/(.*)$": "<rootDir>/../src/common/$1",
+      "^@(/.*)$": "<rootDir>/../src/api/$1",
       "^@/(.*)$": "<rootDir>/../src/$1"
     }
   }

@@ -20,7 +20,7 @@
     "paths": {
       "@shared/*": ["src/shared/*"],
       "@decorators/*": ["src/shared/decorators/*"],
-      "@types/*": ["src/types/*"],
+      "@types/*": ["src/shared/types/*"],
       "@common/*": ["src/common/*"],
       "@*": ["src/api/*"],
       "@/*": ["src/*"],

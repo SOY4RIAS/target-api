@@ -1,8 +1,7 @@
 import { ApiOkResponse } from '@nestjs/swagger';
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 
-import { UserService } from '@user/user.service';
-import { CreateUserDto, UserDto } from '@user/dto';
+import { CreateUserDto, UserDto, UserService } from '@api/user';
 
 import { UserExistsGuard } from './guards/user-exists.guard';
 

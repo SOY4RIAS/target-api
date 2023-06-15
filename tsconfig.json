@@ -22,12 +22,11 @@
       "@decorators/*": ["src/shared/decorators/*"],
       "@types/*": ["src/shared/types/*"],
       "@common/*": ["src/common/*"],
-      "@*": ["src/api/*"],
-      "@/*": ["src/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ],
+  ]
 }

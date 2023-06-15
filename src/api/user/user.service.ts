@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
-import { Environment } from '@/shared/types';
+import { Environment } from '@shared/types';
 
 import { User } from './user.entity';
 import { CreateUserDto } from './dto';

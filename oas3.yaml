@@ -24,6 +24,13 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/UserDto"
+  /api/v1/auth/signin:
+    post:
+      operationId: AuthController_signin
+      parameters: []
+      responses:
+        "201":
+          description: ""
 info:
   title: Target-API
   description: Target-API v2 training project

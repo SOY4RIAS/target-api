@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
 
 import { Environment } from '@shared/types';
 
-import { User } from './user.entity';
 import { CreateUserDto } from './dto';
+import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
@@ -21,7 +21,7 @@ export class UserService {
     this.rounds = Number(config.get<string>('SALT_ROUNDS'));
   }
 
-  async findUserByEmail(email: string): Promise<User | undefined> {
+  findUserByEmail(email: string): Promise<User | null> {
     return this.userRepository.findOneBy({ email });
   }
 

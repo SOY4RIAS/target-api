@@ -18,11 +18,15 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/*": ["src/*"],
+      "@shared/*": ["src/shared/*"],
+      "@decorators/*": ["src/shared/decorators/*"],
+      "@types/*": ["src/shared/types/*"],
+      "@common/*": ["src/common/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": [
     "src/**/*.ts",
     "test/**/*.ts"
-  ],
+  ]
 }

@@ -23,7 +23,7 @@
       "@types/*": ["src/shared/types/*"],
       "@common/*": ["src/common/*"],
       "@api/*": ["src/api/*"],
-      "@root/*": ["./src/*"],
+      "@root/*": ["./src/*"]
     }
   },
   "include": [

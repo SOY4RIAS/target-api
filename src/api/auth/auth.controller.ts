@@ -2,9 +2,9 @@ import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 
 import { CreateUserDto, UserDto, UserService } from '@api/user';
+import { SkipAuth } from '@common/guards/skip-auth.guard';
 
 import { AuthService } from './auth.service';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserExistsGuard } from './guards/user-exists.guard';
 
@@ -18,6 +18,7 @@ export class AuthController {
   @ApiOkResponse({
     type: UserDto,
   })
+  @SkipAuth()
   @UseGuards(UserExistsGuard)
   @Post('signup')
   async signup(@Body() body: CreateUserDto) {
@@ -25,19 +26,18 @@ export class AuthController {
     return UserDto.fromEntity(user);
   }
 
+  @SkipAuth()
   @UseGuards(LocalAuthGuard)
   @Post('signin')
   async signin(@Req() req: { user: UserDto }) {
     return this.authService.signIn(req.user);
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get('check-token')
   async checkToken(@Req() req) {
     return req.user;
   }
 
-  @UseGuards(JwtAuthGuard)
   @Post('signout')
   async signout(@Req() req) {
     return this.authService.signOut(req.user.tokenId);

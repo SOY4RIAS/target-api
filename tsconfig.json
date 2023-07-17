@@ -22,7 +22,8 @@
       "@decorators/*": ["src/shared/decorators/*"],
       "@types/*": ["src/shared/types/*"],
       "@common/*": ["src/common/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@root/*": ["./src/*"],
     }
   },
   "include": [

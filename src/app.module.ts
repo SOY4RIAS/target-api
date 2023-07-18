@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MailService } from '@sendgrid/mail';
 
 import { getEnvPath } from '@common/helper/env.helper';
 import { TypeOrmConfigService } from '@shared/typeorm/typeorm.service';

@@ -83,13 +83,5 @@ module.exports = {
     ],
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": ["error"],
-    "no-magic-numbers": [
-      "error",
-      {
-        "ignore": [0, 1, -1],
-        "ignoreArrayIndexes": true,
-        "enforceConst": true,
-      }
-    ]
   },
 };

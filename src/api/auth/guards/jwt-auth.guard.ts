@@ -4,8 +4,10 @@ import { AuthGuard } from '@nestjs/passport';
 
 import { SKIP_AUTH_KEY } from '@common/guards/skip-auth.guard';
 
+import { JWT_GUARD_KEY } from './constants';
+
 @Injectable()
-export class JwtAuthGuard extends AuthGuard('jwt') {
+export class JwtAuthGuard extends AuthGuard(JWT_GUARD_KEY) {
   constructor(private reflector: Reflector) {
     super();
   }

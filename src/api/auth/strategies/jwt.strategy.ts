@@ -5,6 +5,7 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 
 import { AuthService } from '@api/auth/auth.service';
 import type { AuthPayload } from '@api/auth/types';
+import { ENV } from '@common/constants';
 import { Environment } from '@shared/types';
 
 @Injectable()
@@ -16,7 +17,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.getOrThrow('JWT_SECRET'),
+      secretOrKey: configService.getOrThrow(ENV.JWT_SECRET),
     });
   }
 

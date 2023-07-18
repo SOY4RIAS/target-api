@@ -7,6 +7,7 @@ import { SkipAuth } from '@common/guards/skip-auth.guard';
 import { AuthService } from './auth.service';
 import { LocalAuthGuard } from './guards/local-auth.guard';
 import { UserExistsGuard } from './guards/user-exists.guard';
+import { SignInResponse } from './types';
 
 @Controller('auth')
 export class AuthController {
@@ -21,7 +22,7 @@ export class AuthController {
   @SkipAuth()
   @UseGuards(UserExistsGuard)
   @Post('signup')
-  async signup(@Body() body: CreateUserDto) {
+  async signup(@Body() body: CreateUserDto): Promise<UserDto> {
     const user = await this.userService.createUser(body);
     return UserDto.fromEntity(user);
   }
@@ -29,17 +30,12 @@ export class AuthController {
   @SkipAuth()
   @UseGuards(LocalAuthGuard)
   @Post('signin')
-  async signin(@Req() req: { user: UserDto }) {
+  async signin(@Req() req: { user: UserDto }): Promise<SignInResponse> {
     return this.authService.signIn(req.user);
   }
 
-  @Get('check-token')
-  async checkToken(@Req() req) {
-    return req.user;
-  }
-
   @Post('signout')
-  async signout(@Req() req) {
+  async signout(@Req() req): Promise<void> {
     return this.authService.signOut(req.user.tokenId);
   }
 }

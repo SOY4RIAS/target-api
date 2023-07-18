@@ -4,9 +4,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { UserDto, UserService } from '@api/user';
+import { PlainUser } from '@api/user/types';
 
 import { AuthEntity } from './auth.entity';
-import { AuthPayload } from './types';
+import { AuthPayload, SignInResponse } from './types';
 
 @Injectable()
 export class AuthService {
@@ -17,15 +18,15 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, password: string) {
+  async validateUser(
+    email: string,
+    password: string,
+  ): Promise<PlainUser | null> {
     const user = await this.userService.findUserByEmail(email);
-    if (user && user.hasValidPass(password)) {
-      return user.toPlainObject();
-    }
-    return null;
+    return user?.hasValidPass(password) ? user.toPlainObject() : null;
   }
 
-  async createPayload(user: UserDto) {
+  async createPayload(user: UserDto): Promise<AuthPayload> {
     const authRecord = await this.authRepository.save({
       userId: user.id,
     });
@@ -36,14 +37,14 @@ export class AuthService {
     };
   }
 
-  async validatePayload(payload: AuthPayload) {
+  async validatePayload(payload: AuthPayload): Promise<boolean> {
     const authRecord = await this.authRepository.findOne({
-      where: { tokenId: payload.tokenId },
+      where: { tokenId: payload.tokenId, revoked: false },
     });
-    return authRecord && !authRecord.revoked;
+    return !!authRecord;
   }
 
-  async signIn(user: UserDto) {
+  async signIn(user: UserDto): Promise<SignInResponse> {
     const payload = await this.createPayload(user);
     return {
       user,
@@ -51,7 +52,7 @@ export class AuthService {
     };
   }
 
-  async signOut(tokenId: string) {
+  async signOut(tokenId: string): Promise<void> {
     await this.authRepository.update({ tokenId }, { revoked: true });
   }
 }

@@ -5,6 +5,8 @@ import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserModule } from '@api/user/user.module';
+import { ENV } from '@common/constants';
+import { Environment } from '@shared/types';
 
 import { AuthController } from './auth.controller';
 import { AuthEntity } from './auth.entity';
@@ -18,8 +20,8 @@ import { LocalStrategy } from './strategies/local.strategy';
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (config: ConfigService) => ({
-        secret: config.getOrThrow('JWT_SECRET'),
+      useFactory: async (config: ConfigService<Environment>) => ({
+        secret: config.getOrThrow(ENV.JWT_SECRET),
       }),
       inject: [ConfigService],
     }),

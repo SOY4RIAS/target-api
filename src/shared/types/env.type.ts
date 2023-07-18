@@ -8,4 +8,7 @@ export interface Environment {
   DATABASE_PORT: number;
   JWT_SECRET: string;
   SALT_ROUNDS: number;
+  SENDGRID_API_KEY: string;
+  SENDGRID_SENDER: string;
+  SENDGRID_VERIFICATION_TEMPLATE_ID: string;
 }

@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { APP_GUARD } from '@nestjs/core';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { MailService } from '@sendgrid/mail';
 
 import { getEnvPath } from '@common/helper/env.helper';
 import { TypeOrmConfigService } from '@shared/typeorm/typeorm.service';
@@ -8,6 +10,7 @@ import { TypeOrmConfigService } from '@shared/typeorm/typeorm.service';
 import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SendgridService } from './shared/sendgrid/sendgrid.service';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
 
@@ -18,6 +21,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
     ApiModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  exports: [SendgridService],
+  providers: [AppService, SendgridService],
 })
 export class AppModule {}

@@ -31,13 +31,6 @@ paths:
       responses:
         "201":
           description: ""
-  /api/v1/auth/check-token:
-    get:
-      operationId: AuthController_checkToken
-      parameters: []
-      responses:
-        "200":
-          description: ""
   /api/v1/auth/signout:
     post:
       operationId: AuthController_signout
@@ -45,62 +38,17 @@ paths:
       responses:
         "201":
           description: ""
-  /api/v1/topics:
+  /api/v1/auth/resend-verification-email:
     post:
-      operationId: TopicsController_create
+      operationId: AuthController_resendVerificationEmail
       parameters: []
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/CreateTopicDto"
       responses:
         "201":
           description: ""
+  /api/v1/auth/verify-account:
     get:
-      operationId: TopicsController_findAll
+      operationId: AuthController_verifyAccount
       parameters: []
-      responses:
-        "200":
-          description: ""
-  "/api/v1/topics/{id}":
-    get:
-      operationId: TopicsController_findOne
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-    patch:
-      operationId: TopicsController_update
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/UpdateTopicDto"
-      responses:
-        "200":
-          description: ""
-    delete:
-      operationId: TopicsController_remove
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
       responses:
         "200":
           description: ""
@@ -170,28 +118,3 @@ components:
         - lastName
         - gender
         - email
-    CreateTopicDto:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the topic
-          example: NestJS
-        image:
-          type: string
-          description: The image of the topic
-          example: https://nestjs.com/img/logo_text.svg
-      required:
-        - name
-        - image
-    UpdateTopicDto:
-      type: object
-      properties:
-        name:
-          type: string
-          description: The name of the topic
-          example: NestJS
-        image:
-          type: string
-          description: The image of the topic
-          example: https://nestjs.com/img/logo_text.svg

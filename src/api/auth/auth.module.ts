@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserModule } from '@api/user/user.module';
 import { ENV } from '@common/constants';
+import { SendgridService } from '@shared/sendgrid/sendgrid.service';
 import { Environment } from '@shared/types';
 
 import { AuthController } from './auth.controller';
@@ -27,7 +28,7 @@ import { LocalStrategy } from './strategies/local.strategy';
     }),
     TypeOrmModule.forFeature([AuthEntity]),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, SendgridService],
   controllers: [AuthController],
   exports: [AuthService],
 })

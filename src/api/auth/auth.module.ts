@@ -4,15 +4,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AuthController } from '@api/auth/auth.controller';
+import { AuthEntity } from '@api/auth/auth.entity';
+import { AuthService } from '@api/auth/auth.service';
+import { JwtStrategy } from '@api/auth/strategies/jwt.strategy';
+import { LocalStrategy } from '@api/auth/strategies/local.strategy';
 import { UserModule } from '@api/user/user.module';
 import { ENV } from '@common/constants';
 import { Environment } from '@shared/types';
-
-import { AuthController } from './auth.controller';
-import { AuthEntity } from './auth.entity';
-import { AuthService } from './auth.service';
-import { JwtStrategy } from './strategies/jwt.strategy';
-import { LocalStrategy } from './strategies/local.strategy';
 
 @Module({
   imports: [

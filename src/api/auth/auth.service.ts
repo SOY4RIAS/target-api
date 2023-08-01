@@ -4,16 +4,15 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MoreThanOrEqual, Repository } from 'typeorm';
 
+import { AuthEntity } from '@api/auth/auth.entity';
+import { TOKEN_TYPE, VERIFY_ACCOUNT_PATH } from '@api/auth/constants';
+import { AuthPayload, GeneratedToken, SignInResponse } from '@api/auth/types';
+import { getTokenExpiration } from '@api/auth/utils';
 import { UserDto, UserService } from '@api/user';
 import { PlainUser } from '@api/user/types';
 import { ENV } from '@common/constants';
 import { SendgridService } from '@shared/sendgrid/sendgrid.service';
 import { Environment } from '@shared/types';
-
-import { AuthEntity } from './auth.entity';
-import { TOKEN_TYPE, VERIFY_ACCOUNT_PATH } from './constants';
-import { AuthPayload, GeneratedToken, SignInResponse } from './types';
-import { getTokenExpiration } from './utils';
 
 @Injectable()
 export class AuthService {

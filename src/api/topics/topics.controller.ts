@@ -8,9 +8,9 @@ import {
   Delete,
 } from '@nestjs/common';
 
-import { CreateTopicDto } from './dto/create-topic.dto';
-import { UpdateTopicDto } from './dto/update-topic.dto';
-import { TopicsService } from './topics.service';
+import { CreateTopicDto } from '@api/topics/dto/create-topic.dto';
+import { UpdateTopicDto } from '@api/topics/dto/update-topic.dto';
+import { TopicsService } from '@api/topics/topics.service';
 
 @Controller('topics')
 export class TopicsController {

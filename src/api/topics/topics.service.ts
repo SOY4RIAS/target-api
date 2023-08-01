@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 
-import { CreateTopicDto } from './dto/create-topic.dto';
-import { UpdateTopicDto } from './dto/update-topic.dto';
-import { TopicEntity } from './topic.entity';
+import { CreateTopicDto } from '@api/topics/dto/create-topic.dto';
+import { UpdateTopicDto } from '@api/topics/dto/update-topic.dto';
+import { TopicEntity } from '@api/topics/topic.entity';
 
 @Injectable()
 export class TopicsService {
@@ -13,29 +13,29 @@ export class TopicsService {
     private topicRepository: Repository<TopicEntity>,
   ) {}
 
-  create(createTopicDto: CreateTopicDto) {
+  create(createTopicDto: CreateTopicDto): Promise<TopicEntity> {
     return this.topicRepository.save(createTopicDto);
   }
 
-  findAll() {
+  findAll(): Promise<TopicEntity[]> {
     return this.topicRepository.find();
   }
 
-  findOne(id: number) {
+  findOne(id: number): Promise<TopicEntity | null> {
     return this.topicRepository.findOne({
       where: { id },
     });
   }
 
-  update(id: number, updateTopicDto: UpdateTopicDto) {
+  update(id: number, updateTopicDto: UpdateTopicDto): Promise<UpdateResult> {
     const topic = this.findOne(id);
     if (!topic) {
-      return new NotFoundException(`Topic #${id} not found`);
+      throw new NotFoundException(`Topic #${id} not found`);
     }
     return this.topicRepository.update({ id }, updateTopicDto);
   }
 
-  remove(id: number) {
+  remove(id: number): Promise<UpdateResult> {
     return this.topicRepository.update({ id }, { isDeleted: true });
   }
 }

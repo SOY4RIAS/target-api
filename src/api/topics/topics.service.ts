@@ -27,8 +27,11 @@ export class TopicsService {
     });
   }
 
-  update(id: number, updateTopicDto: UpdateTopicDto): Promise<UpdateResult> {
-    const topic = this.findOne(id);
+  async update(
+    id: number,
+    updateTopicDto: UpdateTopicDto,
+  ): Promise<UpdateResult> {
+    const topic = await this.findOne(id);
     if (!topic) {
       throw new NotFoundException(`Topic #${id} not found`);
     }

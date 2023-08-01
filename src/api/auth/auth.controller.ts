@@ -1,13 +1,12 @@
 import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 
+import { AuthService } from '@api/auth/auth.service';
+import { LocalAuthGuard } from '@api/auth/guards/local-auth.guard';
+import { UserExistsGuard } from '@api/auth/guards/user-exists.guard';
+import { SignInResponse } from '@api/auth/types';
 import { CreateUserDto, UserDto, UserService } from '@api/user';
 import { SkipAuth } from '@common/guards/skip-auth.guard';
-
-import { AuthService } from './auth.service';
-import { LocalAuthGuard } from './guards/local-auth.guard';
-import { UserExistsGuard } from './guards/user-exists.guard';
-import { SignInResponse } from './types';
 
 @Controller('auth')
 export class AuthController {

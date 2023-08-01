@@ -1,6 +1,7 @@
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { INestApplication, ValidationPipe } from '@nestjs/common';
 import * as fs from 'fs';
+
+import { INestApplication, ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as YAML from 'yaml';
 
 export const configApp = (app: INestApplication) => {

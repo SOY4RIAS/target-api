@@ -1,8 +1,8 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsNumber, IsString } from 'class-validator';
 
-import { ApiProperty } from '@nestjs/swagger';
-import { GENDER } from '../constants';
-import { User } from '../user.entity';
+import { GENDER } from '@api/user/constants';
+import { User } from '@api/user/user.entity';
 
 export class UserDto {
   @ApiProperty()

@@ -1,3 +1,5 @@
+import * as bcrypt from 'bcrypt';
+import { Exclude, instanceToPlain } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -5,7 +7,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Exclude } from 'class-transformer';
 
 import { GENDER } from './constants';
 
@@ -38,4 +39,12 @@ export class User {
 
   @UpdateDateColumn({ type: 'timestamp' })
   public updatedAt!: Date;
+
+  public hasValidPass(password: string): boolean {
+    return bcrypt.compareSync(password, this.password);
+  }
+
+  public toPlainObject() {
+    return instanceToPlain(this) as Omit<User, 'password'>;
+  }
 }

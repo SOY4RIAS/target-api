@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsEnum, IsString, IsStrongPassword } from 'class-validator';
 
-import { Match } from '@shared/decorators/match.decorator';
 import { GENDER } from '@api/user/constants';
+import { Match } from '@shared/decorators/match.decorator';
 
 export class CreateUserDto {
   @ApiProperty()

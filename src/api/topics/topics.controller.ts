@@ -8,6 +8,8 @@ import {
   Delete,
 } from '@nestjs/common';
 
+import { TopicEntity } from '@api/topics/topic.entity';
+
 import { CreateTopicDto } from './dto/create-topic.dto';
 import { UpdateTopicDto } from './dto/update-topic.dto';
 import { TopicsService } from './topics.service';
@@ -22,22 +24,22 @@ export class TopicsController {
   }
 
   @Get()
-  findAll() {
+  findAll(): Promise<TopicEntity[]> {
     return this.topicsService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string): Promise<TopicEntity | null> {
     return this.topicsService.findOne(+id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTopicDto: UpdateTopicDto) {
-    return this.topicsService.update(+id, updateTopicDto);
+    this.topicsService.update(+id, updateTopicDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.topicsService.remove(+id);
+    this.topicsService.remove(+id);
   }
 }

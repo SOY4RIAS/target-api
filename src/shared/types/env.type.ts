@@ -10,5 +10,5 @@ export interface Environment {
   SALT_ROUNDS: number;
   SENDGRID_API_KEY: string;
   SENDGRID_SENDER: string;
-  SENDGRID_VERIFICATION_TEMPLATE_ID: string;
+  SENDGRID_AUTH_TEMPLATE: string;
 }

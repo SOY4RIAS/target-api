@@ -32,9 +32,6 @@ export class User {
   public password: string;
 
   @Column({ type: 'boolean', default: false })
-  public isVerified: boolean;
-
-  @Column({ type: 'boolean', default: false })
   public isDeleted: boolean;
 
   @CreateDateColumn({ type: 'timestamp' })

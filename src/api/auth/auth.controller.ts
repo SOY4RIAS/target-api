@@ -1,18 +1,9 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Query,
-  Req,
-  UseGuards,
-} from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
 
 import { AuthService } from '@api/auth/auth.service';
 import { LocalAuthGuard } from '@api/auth/guards/local-auth.guard';
 import { UserExistsGuard } from '@api/auth/guards/user-exists.guard';
-import { VerifyToken } from '@api/auth/guards/verify-token.guard';
 import { SignInResponse } from '@api/auth/types';
 import { CreateUserDto, UserDto, UserService } from '@api/user';
 import { SkipAuth } from '@common/guards/skip-auth.guard';
@@ -32,7 +23,6 @@ export class AuthController {
   @Post('signup')
   async signup(@Body() body: CreateUserDto): Promise<UserDto> {
     const user = await this.userService.createUser(body);
-    await this.authService.sendVerificationEmail(user);
     return UserDto.fromEntity(user);
   }
 
@@ -46,18 +36,5 @@ export class AuthController {
   @Post('signout')
   async signout(@Req() req): Promise<void> {
     return this.authService.signOut(req.user.tokenId);
-  }
-
-  @SkipAuth()
-  @Post('resend-verification-email')
-  async resendVerificationEmail(@Req() req): Promise<void> {
-    return this.authService.sendVerificationEmail(req.email);
-  }
-
-  @SkipAuth()
-  @UseGuards(VerifyToken)
-  @Get('verify-account')
-  async verifyAccount(@Query('token') token): Promise<void> {
-    return this.authService.verifyAccount(token);
   }
 }

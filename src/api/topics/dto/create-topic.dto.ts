@@ -3,6 +3,7 @@ import { IsString, IsUrl } from 'class-validator';
 
 export class CreateTopicDto {
   @ApiProperty({
+    type: String,
     description: 'The name of the topic',
     example: 'NestJS',
   })
@@ -10,6 +11,7 @@ export class CreateTopicDto {
   public name: string;
 
   @ApiProperty({
+    type: String,
     description: 'The image of the topic',
     example: 'https://nestjs.com/img/logo_text.svg',
   })

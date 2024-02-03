@@ -84,6 +84,10 @@ export class AuthService {
     };
   }
 
+  async signOut(tokenId: string): Promise<void> {
+    await this.revokeToken(tokenId);
+  }
+
   async revokeToken(tokenId: string): Promise<void> {
     await this.authRepository.update({ tokenId }, { revoked: true });
   }

@@ -8,6 +8,7 @@ import { TypeOrmConfigService } from '@shared/typeorm/typeorm.service';
 import { ApiModule } from './api/api.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { SendgridService } from './shared/sendgrid/sendgrid.service';
 
 const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
 
@@ -18,6 +19,7 @@ const envFilePath: string = getEnvPath(`${__dirname}/common/envs`);
     ApiModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  exports: [SendgridService],
+  providers: [AppService, SendgridService],
 })
 export class AppModule {}

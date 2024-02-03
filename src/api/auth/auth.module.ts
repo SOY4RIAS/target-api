@@ -11,6 +11,7 @@ import { JwtStrategy } from '@api/auth/strategies/jwt.strategy';
 import { LocalStrategy } from '@api/auth/strategies/local.strategy';
 import { UserModule } from '@api/user/user.module';
 import { ENV } from '@common/constants';
+import { SendgridService } from '@shared/sendgrid/sendgrid.service';
 import { Environment } from '@shared/types';
 
 @Module({
@@ -26,7 +27,7 @@ import { Environment } from '@shared/types';
     }),
     TypeOrmModule.forFeature([AuthEntity]),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, SendgridService],
   controllers: [AuthController],
   exports: [AuthService],
 })

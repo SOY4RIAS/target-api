@@ -38,6 +38,20 @@ paths:
       responses:
         "201":
           description: ""
+  /api/v1/auth/resend-verification-email:
+    post:
+      operationId: AuthController_resendVerificationEmail
+      parameters: []
+      responses:
+        "201":
+          description: ""
+  /api/v1/auth/verify-account:
+    get:
+      operationId: AuthController_verifyAccount
+      parameters: []
+      responses:
+        "200":
+          description: ""
 info:
   title: Target-API
   description: Target-API v2 training project

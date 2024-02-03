@@ -10,3 +10,8 @@ export interface SignInResponse {
   user: UserDto;
   access_token: string;
 }
+
+export interface GeneratedToken {
+  tokenId: string;
+  token: string;
+}

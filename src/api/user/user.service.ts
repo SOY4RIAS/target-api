@@ -29,4 +29,9 @@ export class UserService {
     const password = await bcrypt.hash(user.password, this.rounds);
     return this.userRepository.save({ ...user, password });
   }
+
+  async verifyUser(id: number): Promise<boolean> {
+    const result = await this.userRepository.update(id, { isVerified: true });
+    return !!result.affected;
+  }
 }

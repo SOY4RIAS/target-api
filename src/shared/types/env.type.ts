@@ -11,4 +11,5 @@ export interface Environment {
   SENDGRID_API_KEY: string;
   SENDGRID_SENDER: string;
   SENDGRID_AUTH_TEMPLATE: string;
+  SENDGRID_VERIFICATION_TEMPLATE_ID: string;
 }
